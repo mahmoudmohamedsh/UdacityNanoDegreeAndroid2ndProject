@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<data>
+    <variable
+        name="aster"
+        type="com.udacity.asteroidradar.Asteroid" />
+    <variable
+        name="clickListener"
+        type="com.udacity.asteroidradar.main.adapter.AsteroidListener" />
+</data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="?attr/listPreferredItemPaddingStart"
+        android:paddingLeft="?attr/listPreferredItemPaddingLeft"
+        android:paddingTop="?attr/dialogPreferredPadding"
+        android:paddingEnd="?attr/listPreferredItemPaddingEnd"
+        android:paddingRight="?attr/listPreferredItemPaddingRight"
+        android:onClick="@{()->clickListener.onClick(aster)}">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:AsterMainName="@{aster}"
+            android:textColor="#ff0000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:AsterMainCloseApproachDate="@{aster}"
+            android:textColor="#ff0000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title"
+            app:statusIcon="@{aster.potentiallyHazardous}"
+            tools:srcCompat="@drawable/ic_status_normal" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
