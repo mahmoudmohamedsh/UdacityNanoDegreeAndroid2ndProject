@@ -6,11 +6,16 @@ import androidx.room.*
 
 @Dao
 interface AstroidDao{
-    @Query("select * from DatabaseAsteroid")
-    fun getAsteroid(): LiveData<List<DatabaseAsteroid>>
+    @Query("select * from DatabaseAsteroid order by closeApproachDate ")
+     fun getAsteroid(): LiveData<List<DatabaseAsteroid>>
+
+    @Query("select * from DatabaseAsteroid WHERE closeApproachDate = :param ")
+     fun getTodayAsteroid(param : String): LiveData<List<DatabaseAsteroid>>
+
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg asteroids: DatabaseAsteroid)
+     fun insertAll(vararg asteroids: DatabaseAsteroid)
 }
 
 @Database(entities = [DatabaseAsteroid::class], version = 1)

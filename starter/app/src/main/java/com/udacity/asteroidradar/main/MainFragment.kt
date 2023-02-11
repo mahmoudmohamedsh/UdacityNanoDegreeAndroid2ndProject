@@ -1,6 +1,7 @@
 package com.udacity.asteroidradar.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -28,8 +29,8 @@ class MainFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        val adapter = AstroidAdapter(AsteroidListener{
-            asteroidId -> viewModel.onAsteroidClicked(asteroidId)
+        val adapter = AstroidAdapter(AsteroidListener { asteroidId ->
+            viewModel.onAsteroidClicked(asteroidId)
         })
         binding.asteroidRecycler.adapter = adapter
         viewModel.asteroidList.observe(viewLifecycleOwner, Observer {
@@ -38,11 +39,11 @@ class MainFragment : Fragment() {
             }
         })
 
-        viewModel.navigateToDetails.observe(viewLifecycleOwner, Observer {
-           aster -> aster?.let {
-               this.findNavController().navigate(MainFragmentDirections.actionShowDetail(aster))
+        viewModel.navigateToDetails.observe(viewLifecycleOwner, Observer { aster ->
+            aster?.let {
+                this.findNavController().navigate(MainFragmentDirections.actionShowDetail(aster))
                 viewModel.onAsteroidNavigated()
-        }
+            }
         })
 
         setHasOptionsMenu(true)
@@ -56,6 +57,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         return true
     }
 }

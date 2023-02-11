@@ -61,6 +61,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val asteroidList = asteroidRepo.asteroid
 
 
+
+
     private fun getImageOfTodayFromNetwork() {
         viewModelScope.launch {
             try {
